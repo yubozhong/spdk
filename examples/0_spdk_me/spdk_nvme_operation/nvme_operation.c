@@ -221,6 +221,14 @@ static void spdk_nvme_test(void)
 		sequence.is_completed = 0;
 		sequence.ns_entry = ns_entry;
 
+		printf("ns csi is : %d compared to 2 \n", spdk_nvme_ns_get_csi(ns_entry->ns));
+
+		
+		/*
+		 * If the namespace is a Zoned Namespace, rather than a regular
+		 * NVM namespace, we need to reset the first zone, before we
+		 * write to it. This not needed for regular NVM namespaces.
+		 */
 		if(spdk_nvme_ns_get_csi(ns_entry->ns) == SPDK_NVME_CSI_ZNS) // get command set identifier? 
 		{
 			// SPDK_NVME_CSI_ZNS  what's the meaning ???
