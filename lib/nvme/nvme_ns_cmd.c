@@ -894,6 +894,7 @@ spdk_nvme_ns_cmd_write(struct spdk_nvme_ns *ns, struct spdk_nvme_qpair *qpair,
 
 	payload = NVME_PAYLOAD_CONTIG(buffer, NULL);
 
+	// lba 逻辑块地址， lba_count 逻辑块数， 好像对写数没有影响呢 ？？？
 	req = _nvme_ns_cmd_rw(ns, qpair, &payload, 0, 0, lba, lba_count, cb_fn, cb_arg, SPDK_NVME_OPC_WRITE,
 			      io_flags, 0, 0, 0, false, NULL, &rc);
 	if (req != NULL) {
